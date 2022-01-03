@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,14 @@ public class RestfulController {
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> uploadFileById(@PathVariable int id) {
 
-        Path path = fileStorage.getById(id).getPath();
+        Path path;
+
+        try {
+            path = fileStorage.getById(id).getPath();
+        } catch (IndexOutOfBoundsException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         File file = new File(path.toString());
 
         ByteArrayResource byteArrayResource = null;

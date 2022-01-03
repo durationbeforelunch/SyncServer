@@ -55,7 +55,8 @@ public class FileStorage {
 
     // Метод для использования REST контроллером
     public ExtendedFile getById(int id) {
-        return extendedFileList.get(id);
+        if (extendedFileList.size() < id) throw new IndexOutOfBoundsException();
+        else return extendedFileList.get(id);
     }
 
     // Метод для использования REST контроллером
