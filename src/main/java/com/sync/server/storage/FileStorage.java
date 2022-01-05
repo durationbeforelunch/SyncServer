@@ -12,17 +12,24 @@ import java.util.stream.Collectors;
 @Repository
 public class FileStorage {
 
-    // Временное хранилище
+    // RU: Временное хранилище
+    // EN: Temporary storage
     private List<ExtendedFile> extendedFileList;
     private File origin;
 
-    // Метод, который вызывает рекурсивную инициализацию структуры переданной папки
+    // RU: Метод, который вызывает рекурсивную инициализацию структуры переданной папки
+    // EN: Method, which one calls for recursively initialization of passed directory structure
     private void updateFileStructure() {
 
         List<File> tmp = new ArrayList<>();
 
-        // Здесь маппим объекты File в ExtendedFile, одновременно проходя по структуре папки
-        // origin.toPath().getNameCount() для того, чтобы делать подпуть
+/*       RU: Здесь маппим объекты File в ExtendedFile, одновременно проходя по структуре папки
+         origin.toPath().getNameCount() для того, чтобы делать подпуть
+
+         EN: Mapping an object File to an ExtendedFile, while walking the directory structure
+         origin.toPath().getNameCount() for making subPath
+
+         */
         extendedFileList = getFileList(origin, tmp)
                 .stream()
                 .map(e -> new ExtendedFile(e, origin.toPath().getNameCount()))
@@ -31,7 +38,8 @@ public class FileStorage {
 
     private List<File> getFileList(File file, List<File> list) {
 
-        // Рекурсивно идём до последней папки и собираем файлы от конца и до начала
+        // RU: Рекурсивно идём до последней папки и собираем файлы от конца и до начала
+        // EN: Recursively walking till end and collecting files/directories
         if (file.isDirectory()) {
 
             for (File $file : file.listFiles()) {
@@ -47,19 +55,22 @@ public class FileStorage {
 
     }
 
-    // Простой сеттер, инициализатор
+    // RU: Простой сеттер, инициализатор
+    // EN: Plain setter, initializer
     public void setOrigin(String path) {
         origin = new File(path);
         updateFileStructure();
     }
 
-    // Метод для использования REST контроллером
+    // RU: Метод для использования REST контроллером
+    // EN: Method for REST controller
     public ExtendedFile getById(int id) {
         if (extendedFileList.size() < id) throw new IndexOutOfBoundsException();
         else return extendedFileList.get(id);
     }
 
-    // Метод для использования REST контроллером
+    // RU: Метод для использования REST контроллером
+    // EN: Method for REST controller
     public List<ExtendedFile> getAll() {
         return new ArrayList<>(extendedFileList);
     }

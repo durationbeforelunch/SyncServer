@@ -39,7 +39,8 @@ public class RestfulController {
         return fileStorage.getAll();
     }
 
-    // Эндпоинт скачивания с сервера
+    // RU: Эндпоинт скачивания с сервера
+    // EN: Download endpoint
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> uploadFileById(@PathVariable int id) {
 
@@ -61,8 +62,8 @@ public class RestfulController {
             e.printStackTrace();
         }
 
-        userView.appendLog(String.format("Скачивание файла - %s", file.getName()));
-        log.info("Скачивание файла - {}", file.getName());
+        userView.appendLog(String.format("Скачивание файла - %s", file.getName())); // Downloading log
+        log.info("Скачивание файла - {}", file.getName()); // Downloading log
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")

@@ -23,7 +23,8 @@ public class UserView {
     @Getter
     private JButton folderChooserButton;
 
-    // Инициализация UI
+    // RU: Инициализация UI
+    // EN: Initializing UI
     public void init() {
 
         try {
@@ -92,7 +93,7 @@ public class UserView {
         fileChooser = new JFileChooser();
 
         fileChooser.setCurrentDirectory(new File("."));
-        fileChooser.setDialogTitle("Выберите папку для синхронизации");
+        fileChooser.setDialogTitle("Выберите папку для синхронизации"); // Choose directory for syncing
         // Ограничиваем выбор только папок
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -102,8 +103,8 @@ public class UserView {
 
     private void initLabels() {
 
-        chosenPath = new JLabel("Выберите директорию");
-        discoveryStatus = new JLabel("Обнаружение : Выключено");
+        chosenPath = new JLabel("Выберите директорию"); // Choose directory
+        discoveryStatus = new JLabel("Обнаружение : Выключено"); // Discovery : OFF
 
         chosenPath.setBounds(1, 1, 500, 20);
         discoveryStatus.setBounds(340, 440, 150, 20);
@@ -115,9 +116,9 @@ public class UserView {
 
     public void setDiscoveryStatus(boolean status) {
         if (status) {
-            discoveryStatus.setText("Обнаружение : Включено");
+            discoveryStatus.setText("Обнаружение : Включено"); // Discovery : ON
         } else {
-            discoveryStatus.setText("Обнаружение : Выключено");
+            discoveryStatus.setText("Обнаружение : Выключено"); // Discovery : OFF
         }
     }
 
